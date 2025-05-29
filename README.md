@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/db5b1e5b-6eb4-4c72-8d3f-43605848c0e9
+**URL**: (https://preview--indigo-flight-mirror.lovable.app/)
 
 ## How can I edit this code?
 
