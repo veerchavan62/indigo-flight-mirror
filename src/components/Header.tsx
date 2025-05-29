@@ -1,9 +1,14 @@
 
 import { useState } from 'react';
 import { Menu, X, User, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
+import UserMenu from '@/components/UserMenu';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -11,9 +16,9 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <div className="text-2xl font-bold text-blue-600">
+            <Link to="/" className="text-2xl font-bold text-blue-600">
               6E
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -31,10 +36,19 @@ const Header = () => {
               <Globe className="w-4 h-4" />
               <span>EN</span>
             </button>
-            <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors">
-              <User className="w-4 h-4" />
-              <span>Login</span>
-            </button>
+            
+            {loading ? (
+              <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+            ) : user ? (
+              <UserMenu />
+            ) : (
+              <Link to="/auth">
+                <Button variant="ghost" className="flex items-center space-x-1">
+                  <User className="w-4 h-4" />
+                  <span>Login</span>
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -62,10 +76,19 @@ const Header = () => {
                   <Globe className="w-4 h-4" />
                   <span>EN</span>
                 </button>
-                <button className="flex items-center space-x-1 text-gray-700">
-                  <User className="w-4 h-4" />
-                  <span>Login</span>
-                </button>
+                
+                {loading ? (
+                  <div className="w-6 h-6 bg-gray-200 rounded animate-pulse" />
+                ) : user ? (
+                  <UserMenu />
+                ) : (
+                  <Link to="/auth">
+                    <Button variant="ghost" className="flex items-center space-x-1">
+                      <User className="w-4 h-4" />
+                      <span>Login</span>
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
